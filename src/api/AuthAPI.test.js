@@ -1,5 +1,5 @@
 // src/utils/__tests__/auth.test.js
-// import { validateCredentials } from '../auth';
+
 import db from '../data/db.json';
 import { validateCredentials } from './AuthAPI';
 
