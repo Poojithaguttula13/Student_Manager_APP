@@ -1,0 +1,27 @@
+{
+  "students": [
+    {
+      "id": "38e1",
+      "name": "Poojitha",
+      "age": "24",
+      "grade": "A"
+    },
+    {
+      "id": "0b87",
+      "name": "Uma ",
+      "age": "25",
+      "grade": "B"
+    },
+    {
+      "id": "38b2",
+      "name": "rupeshwar",
+      "age": "23",
+      "grade": "C"
+    }
+  ],
+  "credentials": {
+    "username": "admin123",
+    "password": "password123",
+    "token": "token123"
+  }
+}
