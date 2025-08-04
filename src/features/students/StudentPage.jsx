@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Box, Typography, Paper, Stack, MenuItem } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
-// import { createStudent, getStudents, removeStudent } from '../features/studentSlice';
 import { useNavigate } from 'react-router-dom';
 import { createStudent, getStudents, removeStudent } from './StudentsSlice';
 
