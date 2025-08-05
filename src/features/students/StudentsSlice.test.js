@@ -4,10 +4,9 @@ import reducer, {
   getStudents,
   createStudent,
   removeStudent
-} from '../students/StudentsSlice'; // adjust path if needed
-import * as StudentAPI from '../../api/StudentAPI'; // adjust path if needed
-// import store from '../../store/Store'
-// import store from '../../store/Store';
+} from '../students/StudentsSlice';
+import * as StudentAPI from '../../api/StudentAPI'; 
+
 
 
 jest.mock('axios', () =>({
@@ -17,10 +16,7 @@ jest.mock('axios', () =>({
 
 }));
 
-// ✅ Mock the API module
 jest.mock('../../api/StudentAPI.jsx');
-// const middlewares = [thunk];
-// const mockStore = configureMockStore(middlewares); 
 
 describe('StudentsSlice', () => {
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+// import { MemoryRouter } from 'react-router-dom';
 import AppRoutes from '../routes/Route';
 import LoginPage from '../pages/LoginPage';
 import StudentsPage from '../features/students/StudentPage';
+import { MemoryRouter } from 'react-router-dom';
 
 // Optional: mock the components if needed
 jest.mock('../pages/LoginPage', () => () => <div>Login Page</div>);

@@ -1,18 +1,4 @@
-// StudentsPage.test.js
 
-// jest.mock('@mui/x-data-grid', () => ({
-//     DataGrid: ({ rows }) => (
-//       <div data-testid="mock-datagrid">
-//         {rows.map((row) => (
-//           <div key={row.id}>
-//             <span>{row.name}</span>
-//             <button onClick={() => {}} aria-label={`delete-${row.id}`}>Delete</button>
-//           </div>
-//         ))}
-//       </div>
-//     ),
-//   }));
-  
   
   import React from 'react';
   import { render, screen, fireEvent } from '@testing-library/react';
@@ -22,7 +8,6 @@
   import studentsReducer from './StudentsSlice';
   import StudentsPage from './StudentPage';
   import * as studentActions from './StudentsSlice';
-// import { fireEvent } from '@testing-library/dom/types';
 
 jest.mock('@mui/x-data-grid', () => ({
     DataGrid: ({ rows, columns }) => {
@@ -35,7 +20,6 @@ jest.mock('@mui/x-data-grid', () => ({
             return (
               <div key={row.id} data-testid={`student-row-${row.id}`}>
                 <span>{row.name}</span>
-                {/* This renders the actual Delete button from your component logic */}
                 {actions}
               </div>
             );
@@ -111,11 +95,9 @@ jest.mock('@mui/x-data-grid', () => ({
             </Provider>
           );
       
-          // ✅ Click the Delete button rendered by `renderCell`
           const deleteButton = screen.getAllByText('Delete')[0];
           fireEvent.click(deleteButton);
       
-          // ✅ Now this should pass
           expect(window.confirm).toHaveBeenCalledWith('Are you sure you want to delete this student?');
           expect(studentActions.removeStudent).toHaveBeenCalledWith(1);
         });
@@ -131,7 +113,7 @@ jest.mock('@mui/x-data-grid', () => ({
                 type: 'createStudent',
                 payload: data,
               }));
-            window.confirm = jest.fn(() => true); // ✅ simulate user clicks "OK"
+            window.confirm = jest.fn(() => true); 
         
             render(
               <Provider store={store}>
@@ -141,7 +123,6 @@ jest.mock('@mui/x-data-grid', () => ({
               </Provider>
             );
         
-            // ✅ Fill the form
             fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'John' } });
             fireEvent.change(screen.getByLabelText('Age'), { target: { value: '15' } });
             fireEvent.mouseDown(screen.getByLabelText('Grade')); // open dropdown
