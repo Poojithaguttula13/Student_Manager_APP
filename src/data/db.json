@@ -1,0 +1,18 @@
+{
+  "students": [
+    {
+      "id": "425b",
+      "name": "Rama",
+      "age": 12,
+      "grade": "A"
+    }
+  ],
+  "credentials": [
+    {
+      "id": "1",
+      "email": "admin@gmail.com",
+      "password": "password123",
+      "token": "abc123"
+    }
+  ]
+}
