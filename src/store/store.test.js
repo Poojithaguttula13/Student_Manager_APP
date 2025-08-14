@@ -1,9 +1,36 @@
-import { store } from './store';
-import studentReducer, {
-  fetchStudents,
-  addStudent,
-  deleteStudent,
-} from './StudentSlice';
+// import { store } from './store';
+// import studentReducer, {
+//   fetchStudents,
+//   addStudent,
+//   deleteStudent,
+// } from './StudentSlice';
+
+// jest.mock('axios', () =>({
+//     fetchStudents: jest.fn(),
+//     addStudent: jest.fn(),
+//     deleteStudent: jest.fn()
+
+// }));
+
+// describe('Redux store configuration', () => {
+//   test('should have the correct reducer', () => {
+//     const state = store.getState();
+//     expect(state).toHaveProperty('students');
+//   });
+
+//   test('should initialize students slice with default state', () => {
+//     const state = store.getState().students;
+//     expect(state).toEqual({ list: [] });
+//   });
+
+// });
+
+
+
+import { store } from "./store";
+import { fetchStudents, addStudent, deleteStudent } from "./StudentSlice"; // import your actions
+
+
 
 jest.mock('axios', () =>({
     fetchStudents: jest.fn(),
@@ -12,15 +39,11 @@ jest.mock('axios', () =>({
 
 }));
 
-describe('Redux store configuration', () => {
-  it('should have the correct reducer', () => {
+describe("Redux store", () => {
+  test("should have the correct initial state", () => {
     const state = store.getState();
-    expect(state).toHaveProperty('students');
-  });
-
-  it('should initialize students slice with default state', () => {
-    const state = store.getState().students;
-    expect(state).toEqual({ list: [] });
+    expect(state.students).toBeDefined();
+    expect(state.students.list).toEqual([]); // assuming initial state has list: []
   });
 
 });

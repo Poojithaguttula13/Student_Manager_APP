@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridFilterListIcon, GridViewColumnIcon } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStudents, deleteStudent } from "../../store/StudentSlice";
 import {
@@ -12,14 +12,22 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import MenuBar from "../../components/MenuBar";
+import { DensityMedium } from "@mui/icons-material";
 
-export default function StudentTable({ filterGrade }) {
+export default function StudentTable() {
+  const allGrades = ["All", "A", "B", "C"];
   const [open, setOpen] = useState(false);
   const [selectedStudentId, setSelectedStudentId] = useState(null);
   const [selectedStudentName, setSelectedStudentName] = useState("");
+  const [filterGrade, setFilterGrade] = useState("All");
+  const [density, setDensity] = useState("compact");
+
+
   const dispatch = useDispatch();
   const students = useSelector((state) => state.students.list);
   const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(fetchStudents());
   }, [dispatch]);
@@ -72,8 +80,78 @@ export default function StudentTable({ filterGrade }) {
     },
   ];
 
+  const [visibleColumns, setVisibleColumns] = useState(
+    columns.reduce((acc, col) => ({ ...acc, [col.field]: true }), {})
+  );
+
+  const handleToggle = (field) => {
+    setVisibleColumns((prev) => ({
+      ...prev,
+      [field]: !prev[field],
+    }));
+  };
+
+  const handleDensityChange = (value) => setDensity(value);
+  const handleGradeFilter = (value) => setFilterGrade(value);
+
+  const displayedColumns = columns.filter(
+    (col) => visibleColumns[col.field]
+  );
+
   return (
     <>
+
+<Box
+        sx={{
+          width: "100%",
+          px: { xs: 1, sm: 2, md: 3, lg: 4 },
+          py: { xs: 1, sm: 2 },
+          display: "flex",
+          flexDirection:{
+            xs: "column",
+            sm: "row",
+          },
+          alignItems: "center",
+          gap: 2,
+        }}
+      >
+        <MenuBar
+          icon={<DensityMedium />}
+          label="Density"
+          selected={[density]}
+          options={["compact", "standard", "comfortable"].map((d) => ({
+            label: d,
+            value: d,
+          }))}
+          onChange={handleDensityChange}
+          multiple={false}
+        />
+        <MenuBar
+          icon={<GridFilterListIcon />}
+          label="Search"
+          selected={[filterGrade]}
+          options={allGrades.map((g) => ({ label: g, value: g }))}
+          onChange={handleGradeFilter}
+          multiple={false}
+        />
+        <MenuBar
+          icon={<GridViewColumnIcon />}
+          label="Columns"
+          selected={Object.keys(visibleColumns).filter(
+            (key) => visibleColumns[key]
+          )}
+          options={columns.map((col) => ({
+            label: col.headerName,
+            value: col.field,
+          }))}
+          onChange={handleToggle}
+          multiple={true}
+          showFormControl
+        />
+        <Typography sx={{ marginLeft: "auto", fontWeight: 600 }}>
+          Total Count: {filtered.length}
+        </Typography>
+      </Box>
       <Box
         sx={{
           width: "100%",
@@ -83,9 +161,11 @@ export default function StudentTable({ filterGrade }) {
       >
         <DataGrid
           rows={filtered}
-          columns={columns}
+          columns={displayedColumns}
           pageSize={5}
+          density={density}
           getRowId={(row) => row.id}
+          rowsPerPageOptions={[5, 10, 20]}
         />
       </Box>
       <Dialog

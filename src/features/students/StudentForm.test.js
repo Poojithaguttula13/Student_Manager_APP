@@ -28,7 +28,7 @@ describe('StudentForm', () => {
     store.dispatch = jest.fn(); // spy on dispatch
   });
 
-  it('renders all form fields', () => {
+  test('renders all form fields', () => {
     renderWithProvider(<StudentForm />);
 
     expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();
@@ -37,7 +37,7 @@ describe('StudentForm', () => {
     expect(screen.getByRole('button', { name: /Add/i })).toBeInTheDocument();
   });
 
-  it('shows validation errors when submitting empty form', async () => {
+  test('shows validation errors when submitting empty form', async () => {
     renderWithProvider(<StudentForm />);
     fireEvent.click(screen.getByRole('button', { name: /Add/i }));
 
@@ -48,7 +48,7 @@ describe('StudentForm', () => {
     });
   });
 
-  it('dispatches addStudent action and shows toast on successful submit', async () => {
+  test('dispatches addStudent action and shows toast on successful submit', async () => {
     addStudent.mockImplementation((data) => ({ type: 'students/add', payload: data }));
 
     renderWithProvider(<StudentForm />);

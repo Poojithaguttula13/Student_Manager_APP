@@ -1,10 +1,22 @@
 {
   "students": [
     {
-      "id": "425b",
-      "name": "Rama",
-      "age": 12,
+      "id": "97c9",
+      "name": "Poojitha",
+      "age": 23,
       "grade": "A"
+    },
+    {
+      "id": "54ed",
+      "name": "ramu",
+      "age": 27,
+      "grade": "B"
+    },
+    {
+      "id": "b785",
+      "name": "priya",
+      "age": 28,
+      "grade": "C"
     }
   ],
   "credentials": [
@@ -13,6 +25,118 @@
       "email": "admin@gmail.com",
       "password": "password123",
       "token": "abc123"
+    }
+  ],
+  "cards": [
+    {
+      "id": "1",
+      "title": "Treadmill - Soul Cycle",
+      "deviceQuantity": "05",
+      "status": "Out of order",
+      "reason": "Exceeded the lifetime mileage",
+      "maintenanceStatus": "In progress",
+      "image": "/src/assets/threadmill.avif"
+    },
+    {
+      "id": "2",
+      "title": "Studio Cycle",
+      "deviceQuantity": "01",
+      "status": "Out of order",
+      "reason": "Power supply problem",
+      "maintenanceStatus": "In progress",
+      "image": "src/assets/threadmill.png"
+    },
+    {
+      "id": "3",
+      "title": "Treadmill - Soul Cycle",
+      "deviceQuantity": "02",
+      "status": "Out of order",
+      "reason": "Power meter issue",
+      "maintenanceStatus": "In progress",
+      "image": "src/assets/threadmill.png"
+    },
+    {
+      "id": "4",
+      "title": "Treadmill - Soul Cycle",
+      "deviceQuantity": "05",
+      "status": "Out of order",
+      "reason": "Exceeded the lifetime mileage",
+      "maintenanceStatus": "In progress",
+      "image": "src/assets/threadmill.png"
+    },
+    {
+      "id": "5",
+      "title": "Studio Cycle",
+      "deviceQuantity": "01",
+      "status": "Out of order",
+      "reason": "Power supply problem",
+      "maintenanceStatus": "In progress",
+      "image": "src/assets/threadmill.png"
+    },
+    {
+      "id": "6",
+      "title": "Treadmill - Soul Cycle",
+      "deviceQuantity": "02",
+      "status": "Out of order",
+      "reason": "Power meter issue",
+      "maintenanceStatus": "In progress",
+      "image": "src/assets/threadmill.png"
+    }
+  ],
+  "fitnessDevices": [
+    {
+      "id": "1",
+      "deviceName": "Life Fitness",
+      "deviceType": "Treadmill",
+      "serialNumber": "E1126200543",
+      "facility": "Woodland Hills",
+      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "equipmentStatus": "Active",
+      "powerMeterStatus": "Up to date"
+    },
+    {
+      "id": "2",
+      "deviceName": "Life Fitness",
+      "deviceType": "Treadmill",
+      "serialNumber": "E1126200234",
+      "facility": "Woodland Hills",
+      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "equipmentStatus": "Active",
+      "powerMeterStatus": "Up to date"
+    },
+    {
+      "id": "3",
+      "deviceName": "Life Fitness",
+      "deviceType": "Treadmill",
+      "serialNumber": "E1126201234",
+      "facility": "Woodland Hills",
+      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "equipmentStatus": "Active",
+      "powerMeterStatus": "Up to date"
+    }
+  ],
+  "itAssets": [
+    {
+      "id": "1",
+      "deviceName": "WASP 1",
+      "macId": "10:9B:8C:7D:6E:5F",
+      "ipAddress": "192.168.0.2",
+      "facility": "Woodland Hills",
+      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "connectedDevices": 12,
+      "greengrassVer": "-",
+      "status": "Up to date"
+    },
+    {
+      "id": "2",
+      "deviceName": "Server 1",
+      "macId": "50:4B:3C:2D:1E:0F",
+      "ipAddress": "192.168.0.10",
+      "facility": "Woodland Hills",
+      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "connectedDevices": "-",
+      "greengrassVer": "2.12.4",
+      "status": "Up to date"
     }
   ]
 }

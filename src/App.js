@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
-// import studentPage from "./pages/StudentPage";
 import StudentDetails from "./pages/StudentDetails";
 import PrivateRoute from "./components/PrivateRoute";
 import Layout from "./components/Layout";
@@ -9,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import StudentPage from "./pages/StudentPage";
+import EquipmentPage from "./pages/EquipmentPage";
 
 export default function App() {
   const [mode, setMode] = useState("light");
@@ -21,7 +21,7 @@ export default function App() {
           ...(mode === "dark"
             ? {
                 background: {
-                  default: "#121212",
+                  default: "#1e1e1e",
                   paper: "#1d1d1d",
                 },
                 text: {
@@ -78,6 +78,26 @@ export default function App() {
               </PrivateRoute>
             }
           />
+          <Route 
+            path="/equipment"
+            element={
+              <PrivateRoute>
+                <Layout toggleTheme={toggleTheme} mode={mode}>
+                <EquipmentPage />
+                </Layout>
+              </PrivateRoute>
+            }
+          />
+          {/* <Route 
+            path="/equipmentTable"
+            element={
+              <PrivateRoute>
+                <Layout toggleTheme={toggleTheme} mode={mode}>
+                <EquipmentTable></EquipmentTable>
+                </Layout>
+              </PrivateRoute>
+            }
+          /> */}
         </Routes>
       </BrowserRouter>
       <ToastContainer autoClose={2000} />

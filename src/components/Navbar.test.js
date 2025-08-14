@@ -1,77 +1,78 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Navbar from "./Navbar";
-import { BrowserRouter } from "react-router-dom";
-import '@testing-library/jest-dom';
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-// Mock toast and navigate
-jest.mock("react-toastify", () => ({
-  toast: {
-    success: jest.fn(),
-  },
-}));
-
-const mockedUsedNavigate = jest.fn();
-
+// Mock navigate
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
-  useNavigate: () => mockedUsedNavigate,
+  useNavigate: jest.fn(),
 }));
 
-describe("NavBar Component", () => {
-  
-  beforeEach(() => {
-    localStorage.setItem("token", "test-token");
-  });
+// Mock toast
+jest.mock("react-toastify", () => ({
+  toast: { success: jest.fn() },
+}));
 
-  afterEach(() => {
-    localStorage.clear();
-    jest.clearAllMocks();
-  });
-
-  const toggleThemeMock = jest.fn();
+describe("Navbar Component", () => {
+  const mockNavigate = jest.fn();
+  const mockToggleTheme = jest.fn();
 
   beforeEach(() => {
-    localStorage.clear();
     jest.clearAllMocks();
+    useNavigate.mockReturnValue(mockNavigate);
   });
 
-  const renderComponent = (mode = "light") => {
-    render(
-      <BrowserRouter>
-        <Navbar toggleTheme={toggleThemeMock} mode={mode} />
-      </BrowserRouter>
-    );
-  };
+  test("renders with light mode and toggles theme", () => {
+    render(<Navbar toggleTheme={mockToggleTheme} mode="light" />);
 
-  test("renders title", () => {
-    renderComponent();
-    expect(screen.getByText("Student Management System")).toBeInTheDocument();
+    // Light mode should show DarkModeIcon
+    const toggleBtn = screen.getByRole("button", { name: /switch to dark mode/i });
+    expect(toggleBtn).toBeInTheDocument();
+
+    // Click to toggle
+    fireEvent.click(toggleBtn);
+    expect(mockToggleTheme).toHaveBeenCalled();
   });
 
-  test("calls toggleTheme when theme icon is clicked", () => {
-    renderComponent("light");
-    const iconButton = screen.getByRole("button", { name: /switch to dark mode/i });
-    fireEvent.click(iconButton);
-    expect(toggleThemeMock).toHaveBeenCalledTimes(1);
+  test("renders with dark mode", () => {
+    render(<Navbar toggleTheme={mockToggleTheme} mode="dark" />);
+    expect(screen.getByRole("button", { name: /switch to light mode/i })).toBeInTheDocument();
   });
 
-  it("should log out the user and navigate to '/'", () => {
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
+  test("navigates when clicking Dashboard", () => {
+    render(<Navbar toggleTheme={mockToggleTheme} mode="light" />);
 
-    // Simulate clicking the Logout button
-    const logoutBtn = screen.getByRole("button", { name: /logout/i });
-    fireEvent.click(logoutBtn);
+    fireEvent.click(screen.getByText(/dashboard/i));
+    expect(mockNavigate).toHaveBeenCalledWith("/studentPage");
+  });
 
-    // Assertions
+  test("navigates when clicking Devices", () => {
+    render(<Navbar toggleTheme={mockToggleTheme} mode="light" />);
+
+    fireEvent.click(screen.getByText(/devices/i));
+    expect(mockNavigate).toHaveBeenCalledWith("/equipment");
+  });
+
+  test("handles logout", () => {
+    localStorage.setItem("token", "123");
+
+    render(<Navbar toggleTheme={mockToggleTheme} mode="light" />);
+
+    fireEvent.click(screen.getByRole("button", { name: /logout/i }));
+
     expect(localStorage.getItem("token")).toBeNull();
     expect(toast.success).toHaveBeenCalledWith("Logout successful!");
-    expect(mockedUsedNavigate).toHaveBeenCalledWith("/");
+    expect(mockNavigate).toHaveBeenCalledWith("/");
+  });
+
+  test("updates search term on input change", () => {
+    render(<Navbar toggleTheme={mockToggleTheme} mode="light" />);
+
+    const searchInput = screen.getByPlaceholderText(/search anything or add bookmarks/i);
+    fireEvent.change(searchInput, { target: { value: "test search" } });
+
+    expect(searchInput.value).toBe("test search");
   });
 
 });

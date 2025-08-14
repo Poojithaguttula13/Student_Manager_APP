@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getStudents, createStudent, removeStudent } from "../api/StudentAPI";
+import { getStudents, createStudent, removeStudent, getEquipment, getEquipmentTable } from "../api/StudentAPI";
 
 export const fetchStudents = createAsyncThunk("students/fetch", async () => {
   const res = await getStudents();
@@ -16,10 +16,26 @@ export const deleteStudent = createAsyncThunk("students/delete", async (id) => {
   return id;
 });
 
+export const fetchEquipment = createAsyncThunk("equipment/fetch", async () => {
+  const res = await getEquipment();
+  return res.data;
+});
+
+export const fetchEquipmentTable = createAsyncThunk(
+  "equipment/fetchTable",
+  async () => {
+    const res = await getEquipmentTable();
+    return res.data;
+  }
+);
+
+
 const studentSlice = createSlice({
   name: "students",
   initialState: {
     list: [],
+    equipmentList: [], 
+    equipmentTable: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -32,6 +48,12 @@ const studentSlice = createSlice({
       })
       .addCase(deleteStudent.fulfilled, (state, action) => {
         state.list = state.list.filter((s) => s.id !== action.payload);
+      })
+      .addCase(fetchEquipment.fulfilled, (state, action) => {
+        state.equipmentList = action.payload;
+      })
+      .addCase(fetchEquipmentTable.fulfilled, (state, action) => {
+        state.equipmentTable = action.payload;
       });
   },
 });

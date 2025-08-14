@@ -1,22 +1,17 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import StudentPage from './StudentPage';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import StudentPage from "./StudentPage";
 
-// Mock the child components
-jest.mock('../features/students/StudentForm', () => () => (
-  <div data-testid="student-form">Mock Student Form</div>
-));
+// Mock child components
+jest.mock("../features/students/StudentForm", () => () => <div>Mock Student Form</div>);
+jest.mock("../features/students/StudentTable", () => () => <div>Mock Student Table</div>);
 
-jest.mock('../features/students/GradeFilter', () => () => (
-  <div data-testid="grade-filter">Mock Grade Filter</div>
-));
-
-describe('StudentPage Component', () => {
-  test('renders StudentForm and GradeFilter components', () => {
+describe("StudentPage Component", () => {
+  test("renders StudentForm and StudentTable", () => {
     render(<StudentPage />);
 
-    // Check if mocked components are present
-    expect(screen.getByTestId('student-form')).toBeInTheDocument();
-    expect(screen.getByTestId('grade-filter')).toBeInTheDocument();
+    // Check if both mocked components are present
+    expect(screen.getByText(/Mock Student Form/i)).toBeInTheDocument();
+    expect(screen.getByText(/Mock Student Table/i)).toBeInTheDocument();
   });
 });

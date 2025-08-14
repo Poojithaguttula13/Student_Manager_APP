@@ -11,7 +11,7 @@ describe("PrivateRoute", () => {
     localStorage.clear();
   });
 
-  it("renders children when token is present", () => {
+  test("renders children when token is present", () => {
     localStorage.setItem("token", "test-token");
 
     render(
@@ -32,7 +32,7 @@ describe("PrivateRoute", () => {
     expect(screen.getByText("Protected Content")).toBeInTheDocument();
   });
 
-  it("redirects to '/' when token is missing", () => {
+  test("redirects to '/' when token is missing", () => {
     render(
       <MemoryRouter initialEntries={["/protected"]}>
         <Routes>
