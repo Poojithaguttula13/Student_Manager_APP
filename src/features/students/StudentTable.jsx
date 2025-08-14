@@ -101,7 +101,7 @@ export default function StudentTable() {
   return (
     <>
 
-<Box
+      <Box
         sx={{
           width: "100%",
           px: { xs: 1, sm: 2, md: 3, lg: 4 },
