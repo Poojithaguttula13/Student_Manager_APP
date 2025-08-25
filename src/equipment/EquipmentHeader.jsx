@@ -1,32 +1,117 @@
+// import React from "react";
+// import { Box, IconButton, Typography, InputBase, Button, useTheme } from "@mui/material";
+// import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+// import SearchIcon from "@mui/icons-material/Search";
+
+// export default function EquipmentHeader() {
+//     const theme = useTheme();
+
+//   return (
+//     <Box
+//       sx={{
+//         display: "flex",
+//         alignItems: "center",
+//         justifyContent: "space-between",
+//         // backgroundColor: "#000",
+//         padding: "20px 20px",
+//       }}
+//     >
+//       {/* Left Section */}
+//       <Box display="flex" alignItems="center" gap={2}>
+//         <IconButton >
+//           <ArrowBackIosNewIcon fontSize="small" />
+//         </IconButton>
+//         <Typography
+//           variant="h6"
+//           sx={{
+//             // color: "#fff",
+//             fontWeight: "bold",
+//             // borderRight: "1px solid #444",
+//             paddingRight: 2,
+//           }}
+//         >
+//           Equipment
+//         </Typography>
+//       </Box>
+
+// <Box
+//         sx={{
+//           display: "flex",
+//           alignItems: "center",
+//         border:"1px solid #444",
+//         borderColor:"GrayText",
+//           borderRadius: "20px",
+//           px: 2,
+//           py: 0.5,
+//           width: "30%",
+//         }}
+//       >
+//         <SearchIcon sx={{ fontSize: 18, color: "gray", mr: 1 }} />
+//         <InputBase
+//           placeholder="Search Equipment"
+//           sx={{
+//             fontSize: 14,
+//             width: "100%",
+//           }}
+//         />
+//       </Box>
+      
+//       {/* Right Section */}
+//       <Button
+//         variant="outlined"
+//         sx={{
+//             color: theme.palette.text.primary,
+//             borderColor: theme.palette.text.primary,
+//           fontSize: "14px",
+//           borderRadius: 0,
+          
+//         }}
+//       >
+//         + Add Equipment
+//       </Button>
+//     </Box>
+//   );
+// }
+
+
 import React from "react";
-import { Box, IconButton, Typography, InputBase, Button, useTheme } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Typography,
+  InputBase,
+  Button,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function EquipmentHeader() {
-    const theme = useTheme();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // mobile
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down("md")); // tablet
 
   return (
     <Box
       sx={{
         display: "flex",
-        alignItems: "center",
+        alignItems: isSmallScreen ? "stretch" : "center",
         justifyContent: "space-between",
-        // backgroundColor: "#000",
-        padding: "20px 20px",
+        flexWrap: "wrap", // allows wrapping on smaller devices
+        gap: 2,
+        padding: "16px",
       }}
     >
       {/* Left Section */}
-      <Box display="flex" alignItems="center" gap={2}>
-        <IconButton >
+      <Box display="flex" alignItems="center" gap={1}>
+        <IconButton>
           <ArrowBackIosNewIcon fontSize="small" />
         </IconButton>
         <Typography
-          variant="h6"
+          variant={isSmallScreen ? "subtitle1" : "h6"}
           sx={{
-            // color: "#fff",
             fontWeight: "bold",
-            // borderRight: "1px solid #444",
             paddingRight: 2,
           }}
         >
@@ -34,16 +119,18 @@ export default function EquipmentHeader() {
         </Typography>
       </Box>
 
-<Box
+      {/* Search Section */}
+      <Box
         sx={{
           display: "flex",
           alignItems: "center",
-        border:"1px solid #444",
-        borderColor:"GrayText",
+          border: "1px solid",
+          borderColor: "GrayText",
           borderRadius: "20px",
           px: 2,
           py: 0.5,
-          width: "30%",
+          width: isSmallScreen ? "100%" : isMediumScreen ? "50%" : "30%", // responsive width
+          order: isSmallScreen ? 3 : "unset", // move search below on small
         }}
       >
         <SearchIcon sx={{ fontSize: 18, color: "gray", mr: 1 }} />
@@ -55,16 +142,17 @@ export default function EquipmentHeader() {
           }}
         />
       </Box>
-      
+
       {/* Right Section */}
       <Button
         variant="outlined"
         sx={{
-            color: theme.palette.text.primary,
-            borderColor: theme.palette.text.primary,
+          color: theme.palette.text.primary,
+          borderColor: theme.palette.text.primary,
           fontSize: "14px",
           borderRadius: 0,
-          
+          minWidth: isSmallScreen ? "100%" : "auto", // full-width on mobile
+          order: isSmallScreen ? 2 : "unset", // move button above search on mobile
         }}
       >
         + Add Equipment

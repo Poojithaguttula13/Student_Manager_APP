@@ -35,7 +35,7 @@
       "status": "Out of order",
       "reason": "Exceeded the lifetime mileage",
       "maintenanceStatus": "In progress",
-      "image": "/src/assets/threadmill.avif"
+      "image": "/assets/treadmill.avif"
     },
     {
       "id": "2",
@@ -44,7 +44,7 @@
       "status": "Out of order",
       "reason": "Power supply problem",
       "maintenanceStatus": "In progress",
-      "image": "src/assets/threadmill.png"
+      "image": "/assets/soulcycle.jpg"
     },
     {
       "id": "3",
@@ -53,7 +53,7 @@
       "status": "Out of order",
       "reason": "Power meter issue",
       "maintenanceStatus": "In progress",
-      "image": "src/assets/threadmill.png"
+      "image": "/assets/treadmill.avif"
     },
     {
       "id": "4",
@@ -62,7 +62,7 @@
       "status": "Out of order",
       "reason": "Exceeded the lifetime mileage",
       "maintenanceStatus": "In progress",
-      "image": "src/assets/threadmill.png"
+      "image": "/assets/soulcycle.jpg"
     },
     {
       "id": "5",
@@ -71,7 +71,7 @@
       "status": "Out of order",
       "reason": "Power supply problem",
       "maintenanceStatus": "In progress",
-      "image": "src/assets/threadmill.png"
+      "image": "/assets/treadmill.avif"
     },
     {
       "id": "6",
@@ -80,7 +80,7 @@
       "status": "Out of order",
       "reason": "Power meter issue",
       "maintenanceStatus": "In progress",
-      "image": "src/assets/threadmill.png"
+      "image": "/assets/soulcycle.jpg"
     }
   ],
   "fitnessDevices": [
@@ -109,6 +109,26 @@
       "deviceName": "Life Fitness",
       "deviceType": "Treadmill",
       "serialNumber": "E1126201234",
+      "facility": "Woodland Hills",
+      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "equipmentStatus": "Active",
+      "powerMeterStatus": "Up to date"
+    },
+    {
+      "id": "4",
+      "deviceName": "Life Fitness",
+      "deviceType": "Treadmill",
+      "serialNumber": "E1126201236",
+      "facility": "Woodland Hills",
+      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "equipmentStatus": "Active",
+      "powerMeterStatus": "Up to date"
+    },
+    {
+      "id": "5",
+      "deviceName": "Life Fitness",
+      "deviceType": "Treadmill",
+      "serialNumber": "E1126201230",
       "facility": "Woodland Hills",
       "lastActivity": "28 Apr 2024 | 12:38 PM",
       "equipmentStatus": "Active",
