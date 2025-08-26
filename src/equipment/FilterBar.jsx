@@ -3,16 +3,17 @@ import {
   Box,
   Typography,
   IconButton,
-  Menu,
-  MenuItem,
-  Checkbox,
-  ListItemText,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-  TextField,
+  Checkbox,
+  ListItemText,
   Button,
+  Divider,
+  Menu,
+  MenuItem,
+  TextField,
 } from "@mui/material";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import ViewArrayOutlinedIcon from "@mui/icons-material/ViewArrayOutlined";
@@ -21,9 +22,7 @@ import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
-import "jspdf-autotable";
-import autoTable from "jspdf-autotable";   // <-- import the function
-
+import autoTable from "jspdf-autotable";
 
 export default function FilterBar({
   visibleColumns,
@@ -31,7 +30,7 @@ export default function FilterBar({
   fitnessData,
   itAssetsData,
 }) {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [filterDialogOpen, setFilterDialogOpen] = useState(false);
   const [downloadAnchor, setDownloadAnchor] = useState(null);
 
   const [emailDialogOpen, setEmailDialogOpen] = useState(false);
@@ -47,7 +46,6 @@ export default function FilterBar({
   // ✅ Export Excel with 2 sheets
   const handleExportExcel = () => {
     const wb = XLSX.utils.book_new();
-
     const fitnessSheet = XLSX.utils.json_to_sheet(fitnessData);
     const itAssetsSheet = XLSX.utils.json_to_sheet(itAssetsData);
 
@@ -62,7 +60,6 @@ export default function FilterBar({
   const handleExportPDF = () => {
     const doc = new jsPDF();
 
-    // Fitness Table
     doc.text("Fitness Devices", 14, 15);
     autoTable(doc, {
       startY: 20,
@@ -70,7 +67,6 @@ export default function FilterBar({
       body: fitnessData.map((row) => Object.values(row)),
     });
 
-    // IT Assets Table
     const finalY = doc.lastAutoTable.finalY + 10;
     doc.text("IT Assets", 14, finalY);
     autoTable(doc, {
@@ -105,12 +101,16 @@ export default function FilterBar({
       >
         <Typography sx={{ fontSize: 20 }}>Filter Equipments</Typography>
         <Box sx={{ display: "flex", gap: 1 }}>
+          {/* Filter button now opens a dialog */}
           <IconButton
+            data-testid="download-button"
+            aria-label="Download"
             sx={{ border: "1px solid gray", p: 1 }}
-            onClick={(e) => setAnchorEl(e.currentTarget)}
+            onClick={() => setFilterDialogOpen(true)}
           >
             <FilterAltOutlinedIcon />
           </IconButton>
+
           <IconButton sx={{ border: "1px solid gray", p: 1 }}>
             <ViewArrayOutlinedIcon />
           </IconButton>
@@ -118,6 +118,8 @@ export default function FilterBar({
             <BookmarkBorderIcon />
           </IconButton>
           <IconButton
+            aria-label="download"
+            data-testid="download-button"
             sx={{ border: "1px solid gray", p: 1 }}
             onClick={(e) => setDownloadAnchor(e.currentTarget)}
           >
@@ -126,19 +128,81 @@ export default function FilterBar({
         </Box>
       </Box>
 
-      {/* Column Filter Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={() => setAnchorEl(null)}
+      <Dialog
+        open={filterDialogOpen}
+        onClose={() => setFilterDialogOpen(false)}
+        fullWidth
+        maxWidth="md"
       >
-        {Object.keys(visibleColumns).map((col) => (
-          <MenuItem key={col} onClick={() => handleColumnToggle(col)}>
-            <Checkbox checked={visibleColumns[col]} />
-            <ListItemText primary={col.toUpperCase()} />
-          </MenuItem>
-        ))}
-      </Menu>
+        <DialogTitle>Select Visible Columns</DialogTitle>
+        <DialogContent dividers>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 4,
+            }}
+          >
+            {/* Fitness Devices Section */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Fitness Devices
+              </Typography>
+              {[
+                { field: "deviceName", label: "DEVICE NAME" },
+                { field: "deviceType", label: "DEVICE TYPE" },
+                { field: "serialNumber", label: "SERIAL NUMBER" },
+                { field: "facility", label: "FACILITY" },
+                { field: "lastActivity", label: "LAST ACTIVITY ON" },
+                { field: "equipmentStatus", label: "EQUIPMENT STATUS" },
+                { field: "powerMeterStatus", label: "POWER METER STATUS" },
+              ].map((col) => (
+                <Box
+                  key={col.field}
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <Checkbox
+                    checked={visibleColumns[col.field]}
+                    onChange={() => handleColumnToggle(col.field)}
+                  />
+                  <ListItemText primary={col.label} />
+                </Box>
+              ))}
+            </Box>
+
+            {/* IT Assets Section */}
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                IT Assets
+              </Typography>
+              {[
+                { field: "deviceName", label: "DEVICE NAME" },
+                { field: "macId", label: "MAC ID" },
+                { field: "ipAddress", label: "IP ADDRESS" },
+                { field: "facility", label: "FACILITY" },
+                { field: "lastActivity", label: "LAST ACTIVITY ON" },
+                { field: "connectedDevices", label: "CONNECTED DEVICES" },
+                { field: "greengrassVer", label: "GREENGRASS VER." },
+                { field: "status", label: "STATUS" },
+              ].map((col) => (
+                <Box
+                  key={col.field}
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <Checkbox
+                    checked={visibleColumns[col.field]}
+                    onChange={() => handleColumnToggle(col.field)}
+                  />
+                  <ListItemText primary={col.label} />
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setFilterDialogOpen(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
 
       {/* Download Menu */}
       <Menu
@@ -156,7 +220,9 @@ export default function FilterBar({
       {/* Email Dialog */}
       <Dialog open={emailDialogOpen} onClose={() => setEmailDialogOpen(false)}>
         <DialogTitle>Send Equipment Data</DialogTitle>
-        <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <DialogContent
+          sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+        >
           <TextField
             label="Recipient Email"
             value={emailDetails.to}
@@ -176,7 +242,7 @@ export default function FilterBar({
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setEmailDialogOpen(false)}>Cancel</Button>
-          <Button onClick={handleSendEmail} variant="contained">
+          <Button onClick={handleSendEmail} variant="contained"   data-testid="send-email-button">
             Send
           </Button>
         </DialogActions>

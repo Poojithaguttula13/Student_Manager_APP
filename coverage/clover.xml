@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1756126563677" clover="3.2.0">
-  <project timestamp="1756126563677" name="All files">
-    <metrics statements="272" coveredstatements="207" conditionals="81" coveredconditionals="53" methods="123" coveredmethods="79" elements="476" coveredelements="339" complexity="0" loc="272" ncloc="272" packages="7" files="23" classes="23"/>
+<coverage generated="1756227229419" clover="3.2.0">
+  <project timestamp="1756227229420" name="All files">
+    <metrics statements="276" coveredstatements="215" conditionals="81" coveredconditionals="53" methods="126" coveredmethods="84" elements="483" coveredelements="352" complexity="0" loc="276" ncloc="276" packages="7" files="23" classes="23"/>
     <package name="src">
       <metrics statements="21" coveredstatements="5" conditionals="8" coveredconditionals="1" methods="6" coveredmethods="2"/>
       <file name="App.js" path="D:\React\Student_Manager\equinox_page\Student_Manager_APP\src\App.js">
@@ -103,7 +103,7 @@
       </file>
     </package>
     <package name="src.equipment">
-      <metrics statements="110" coveredstatements="82" conditionals="42" coveredconditionals="26" methods="47" coveredmethods="30"/>
+      <metrics statements="114" coveredstatements="90" conditionals="42" coveredconditionals="26" methods="50" coveredmethods="35"/>
       <file name="EquipmentCorosuel.jsx" path="D:\React\Student_Manager\equinox_page\Student_Manager_APP\src\equipment\EquipmentCorosuel.jsx">
         <metrics statements="18" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="4"/>
         <line num="25" count="3" type="stmt"/>
@@ -184,47 +184,51 @@
         <line num="238" count="1" type="stmt"/>
       </file>
       <file name="FilterBar.jsx" path="D:\React\Student_Manager\equinox_page\Student_Manager_APP\src\equipment\FilterBar.jsx">
-        <metrics statements="40" coveredstatements="20" conditionals="4" coveredconditionals="0" methods="19" coveredmethods="7"/>
-        <line num="34" count="8" type="stmt"/>
-        <line num="35" count="8" type="stmt"/>
-        <line num="37" count="8" type="stmt"/>
-        <line num="38" count="8" type="stmt"/>
-        <line num="40" count="8" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
-        <line num="48" count="8" type="stmt"/>
+        <metrics statements="44" coveredstatements="28" conditionals="4" coveredconditionals="0" methods="22" coveredmethods="12"/>
+        <line num="33" count="17" type="stmt"/>
+        <line num="34" count="17" type="stmt"/>
+        <line num="36" count="17" type="stmt"/>
+        <line num="37" count="17" type="stmt"/>
+        <line num="39" count="17" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="47" count="17" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
         <line num="49" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
         <line num="52" count="1" type="stmt"/>
-        <line num="54" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
         <line num="55" count="1" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
-        <line num="58" count="1" type="stmt"/>
-        <line num="62" count="8" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="60" count="17" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
         <line num="63" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
         <line num="67" count="0" type="stmt"/>
         <line num="70" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
         <line num="75" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
         <line num="79" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="87" count="8" type="stmt"/>
-        <line num="88" count="0" type="stmt"/>
-        <line num="91" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="95" count="8" type="stmt"/>
-        <line num="110" count="1" type="stmt"/>
-        <line num="122" count="2" type="stmt"/>
+        <line num="83" count="17" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="91" count="17" type="stmt"/>
+        <line num="109" count="2" type="stmt"/>
+        <line num="124" count="3" type="stmt"/>
         <line num="133" count="0" type="stmt"/>
-        <line num="136" count="16" type="stmt"/>
-        <line num="147" count="0" type="stmt"/>
-        <line num="150" count="0" type="stmt"/>
-        <line num="157" count="0" type="stmt"/>
-        <line num="164" count="0" type="stmt"/>
-        <line num="172" count="0" type="stmt"/>
-        <line num="178" count="0" type="stmt"/>
+        <line num="160" count="119" type="stmt"/>
+        <line num="166" count="1" type="stmt"/>
+        <line num="188" count="136" type="stmt"/>
+        <line num="194" count="0" type="stmt"/>
+        <line num="203" count="0" type="stmt"/>
+        <line num="211" count="0" type="stmt"/>
+        <line num="214" count="1" type="stmt"/>
+        <line num="221" count="0" type="stmt"/>
+        <line num="230" count="1" type="stmt"/>
+        <line num="238" count="1" type="stmt"/>
+        <line num="244" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.features.students">
