@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import FilterBar from "./FilterBar";
+import FilterBar from "./ViewArray";
 import * as XLSX from "xlsx";
 
 

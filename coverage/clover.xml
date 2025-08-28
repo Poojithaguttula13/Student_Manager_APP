@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1756227229419" clover="3.2.0">
-  <project timestamp="1756227229420" name="All files">
+<coverage generated="1756376678030" clover="3.2.0">
+  <project timestamp="1756376678030" name="All files">
     <metrics statements="276" coveredstatements="215" conditionals="81" coveredconditionals="53" methods="126" coveredmethods="84" elements="483" coveredelements="352" complexity="0" loc="276" ncloc="276" packages="7" files="23" classes="23"/>
     <package name="src">
       <metrics statements="21" coveredstatements="5" conditionals="8" coveredconditionals="1" methods="6" coveredmethods="2"/>
@@ -215,20 +215,20 @@
         <line num="87" count="1" type="stmt"/>
         <line num="88" count="1" type="stmt"/>
         <line num="91" count="17" type="stmt"/>
-        <line num="109" count="2" type="stmt"/>
-        <line num="124" count="3" type="stmt"/>
-        <line num="133" count="0" type="stmt"/>
-        <line num="160" count="119" type="stmt"/>
-        <line num="166" count="1" type="stmt"/>
-        <line num="188" count="136" type="stmt"/>
-        <line num="194" count="0" type="stmt"/>
-        <line num="203" count="0" type="stmt"/>
-        <line num="211" count="0" type="stmt"/>
-        <line num="214" count="1" type="stmt"/>
-        <line num="221" count="0" type="stmt"/>
-        <line num="230" count="1" type="stmt"/>
-        <line num="238" count="1" type="stmt"/>
-        <line num="244" count="0" type="stmt"/>
+        <line num="116" count="2" type="stmt"/>
+        <line num="128" count="3" type="stmt"/>
+        <line num="137" count="0" type="stmt"/>
+        <line num="164" count="119" type="stmt"/>
+        <line num="170" count="1" type="stmt"/>
+        <line num="192" count="136" type="stmt"/>
+        <line num="198" count="0" type="stmt"/>
+        <line num="207" count="0" type="stmt"/>
+        <line num="215" count="0" type="stmt"/>
+        <line num="218" count="1" type="stmt"/>
+        <line num="225" count="0" type="stmt"/>
+        <line num="234" count="1" type="stmt"/>
+        <line num="242" count="1" type="stmt"/>
+        <line num="248" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.features.students">

@@ -102,16 +102,16 @@ export default function FilterBar({
         <Typography sx={{ fontSize: 20 }}>Filter Equipments</Typography>
         <Box sx={{ display: "flex", gap: 1 }}>
           {/* Filter button now opens a dialog */}
+          <IconButton sx={{ border: "1px solid gray", p: 1 }}>
+            <FilterAltOutlinedIcon />
+          </IconButton>
+
           <IconButton
             data-testid="download-button"
             aria-label="Download"
             sx={{ border: "1px solid gray", p: 1 }}
             onClick={() => setFilterDialogOpen(true)}
           >
-            <FilterAltOutlinedIcon />
-          </IconButton>
-
-          <IconButton sx={{ border: "1px solid gray", p: 1 }}>
             <ViewArrayOutlinedIcon />
           </IconButton>
           <IconButton sx={{ border: "1px solid gray", p: 1 }}>
@@ -242,7 +242,11 @@ export default function FilterBar({
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setEmailDialogOpen(false)}>Cancel</Button>
-          <Button onClick={handleSendEmail} variant="contained"   data-testid="send-email-button">
+          <Button
+            onClick={handleSendEmail}
+            variant="contained"
+            data-testid="send-email-button"
+          >
             Send
           </Button>
         </DialogActions>

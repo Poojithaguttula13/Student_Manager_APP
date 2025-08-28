@@ -2,7 +2,7 @@ import { useState } from "react";
 import EquipmentCorosuel from "../equipment/EquipmentCorosuel";
 import EquipmentHeader from "../equipment/EquipmentHeader";
 import EquipmentTable from "../equipment/EquipmentTable";
-import FilterBar from "../equipment/FilterBar";
+import FilterBar from "../equipment/ViewArray";
 
 export default function EquipmentPage() {
   const [visibleColumns, setVisibleColumns] = useState({
