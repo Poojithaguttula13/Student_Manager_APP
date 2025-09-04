@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Typography, Button, Box, IconButton, Tooltip, TextField, InputAdornment, InputBase } from "@mui/material";
+import React from "react";
+import { Typography, Button, Box, IconButton, Tooltip, InputBase } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -9,8 +9,6 @@ import { PersonOutline } from "@mui/icons-material";
 
 function Navbar({ toggleTheme, mode }) {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("");
-
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -18,114 +16,89 @@ function Navbar({ toggleTheme, mode }) {
     navigate("/");
   };
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-    // if (onSearch) onSearch(e.target.value); // Optional callback for parent
-  };
-
   return (
-    <>
-    
-    <Box
-      sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          height: { xs: "auto", sm: "80px" },
-          px: 8,
-          py: {
-            xs: 1,
-            sm: 1,
-            md: 1,
-          },
-          boxShadow: 1,
-          gap: { xs: 1, sm: 0 },
-        }}
-      >
-      {/* Left Logo */}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-        <Typography sx={{ fontWeight: "bold", letterSpacing: 2 }}>
-          EQUINOX
-        </Typography>
-        <Typography sx={{ color: "gray", fontWeight: 500 }}>| PHOTON</Typography>
-      </Box>
-
-      {/* Search Bar */}
+    <Box sx={{ backgroundColor: "black", color: "white" }}>
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
-          borderBottom: "1px solid gray",
-          flex: 1,
-          mx: 10,
-          maxWidth: "800px",
+          justifyContent: "space-between",
+          px: 10,   // increased side padding (was 4)
+          py: 3,
         }}
       >
-        <GridSearchIcon sx={{ fontSize: 16, color: "gray" }} />
-        <InputBase
-          placeholder="Search anything or add bookmarks"
+        {/* Left Logo */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1, px:4 }}>
+          <Typography sx={{ fontWeight: "bold", letterSpacing: 1 }}>
+            EQUINOX
+          </Typography>
+          <Typography sx={{ color: "gray", fontWeight: 500 }}>| PHOTON</Typography>
+        </Box>
+
+        {/* Search Bar */}
+        <Box
           sx={{
-            // color: "white",
-            fontSize: 14,
-            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            borderBottom: "1px solid gray",
+            flex: 1,
+            mx: 6,
+            maxWidth: "450px",   // balanced search bar length
           }}
-        />
-      </Box>
-      {/* </Box> */}
-
-      {/* Right Menu */}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 4 }}>
-      <Typography
-        sx={{ cursor: "pointer" }}
-        onClick={() => navigate("/studentPage")}
-      >
-        Dashboard
-      </Typography>
-
-      <Typography sx={{ cursor: "pointer" }}
-        onClick={() => navigate("/equipment")}
         >
-        Devices
-      </Typography>
-        <Typography sx={{ cursor: "pointer" }}>Software</Typography>
-        <IconButton
+          <GridSearchIcon sx={{ fontSize: 18, color: "gray", mr: 2 }} />
+          <InputBase
+            placeholder="Search anything or add bookmarks"
+            sx={{
+              fontSize: 14,
+              width: "100%",
+              color: "white",
+              pb: 0.2,
+            }}
+          />
+        </Box>
+
+        {/* Right Menu */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+          <Typography sx={{ cursor: "pointer" }} onClick={() => navigate("/studentPage")}>
+            Dashboard
+          </Typography>
+          <Typography sx={{ cursor: "pointer", fontWeight: "bold" }} onClick={() => navigate("/equipment")}>
+            Devices
+          </Typography>
+          <Typography sx={{ cursor: "pointer" }}>Software</Typography>
+
+        {/* <IconButton
           sx={{
-            // color: "white",
-            // border: "1px solid black",
             border: "1px solid gray",
             borderRadius: "50%",
             p: 0.5,
           }}
         >
           <PersonOutline />
-        </IconButton>
-      {/* </Box> */}
+        </IconButton> */}
 
+          <Tooltip title={mode === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}>
+            <IconButton onClick={toggleTheme} sx={{ color: "white" }}>
+              {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+            </IconButton>
+          </Tooltip>
 
-        <Tooltip
-          title={
-            mode === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"
-          }
-        >
-          <IconButton onClick={toggleTheme} color="inherit">
-            {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-          </IconButton>
-        </Tooltip>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={handleLogout}
-          size="small"
-        >
-          Logout
-        </Button>
+          <Button
+            variant="outlined"
+            size="small"
+            sx={{ borderColor: "white", color: "white", textTransform: "none" }}
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        </Box>
       </Box>
+
+      {/* Divider line */}
+      <Box sx={{ borderBottom: "1px solid gray", width: "100%" }} />
     </Box>
-    
-    </>
-    
   );
 }
 
 export default Navbar;
-

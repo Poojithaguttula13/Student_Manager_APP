@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
-  Container,
-  Collapse,
   Card,
-  CardContent,
   Chip,
   CardMedia,
   IconButton,
@@ -16,8 +13,6 @@ import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GridMoreVertIcon } from "@mui/x-data-grid";
-// import soulcycle from "../assets/soulcycle.jpg"
-// import threadmillImg from "../assets/threadmill.avif";
 
 
 
@@ -37,17 +32,6 @@ export default function EquipmentCorosuel({ header, table, filter }) {
       })
       .catch((err) => console.error("Error fetching cards:", err));
   }, []);
-
-
-  const handleMenuOpen = (event, card) => {
-    setAnchorEl(event.currentTarget);
-    setSelectedCard(card);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    setSelectedCard(null);
-  };
 
 
   const sliderSettings = {
@@ -169,35 +153,3 @@ export default function EquipmentCorosuel({ header, table, filter }) {
   );
 }
 
-
-
-
-            {/* <Box display="flex" justifyContent="space-between">
-              <CardMedia 
-              component="img"
-              image={card?.image || threadmillImg }
-              alt="image"
-                style={{ width: "70px", height: "70px", objectFit: "contain" }}
-                />
-              <Chip
-                label={card.status}
-                size="small"
-                sx={{
-                  backgroundColor: "transparent",
-                  border: "1px solid red",
-                  color: "red",
-                  fontSize: "0.7rem",
-                  height: "20px",
-                  mt: 1,
-                }}
-              />
-              <GridMoreVertIcon sx={{  fontSize: "1.2rem" }} />
-            </Box>
-
-            <Typography variant="subtitle1" sx={{ mt: 1, fontWeight: "bold" }}>
-              {card.title}
-            </Typography>
-            <Typography variant="body2" >
-              Device Quantity&nbsp;
-              <span >{card.deviceQuantity}</span>
-            </Typography> */}

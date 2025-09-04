@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Box } from "@mui/material";
-// import FilterStudents from "../features/students/FilterStudents";
 import StudentForm from "../features/students/StudentForm";
 import StudentTable from "../features/students/StudentTable";
 

@@ -17,12 +17,14 @@ export default function EquipmentTable({
   visibleColumns,
   setFitnessData,
   setItAssetsData,
+  filteredFitnessData,
+  filteredItAssetsData,
 }) {
   const [tables, setTables] = useState([]);
-  const [activeTable, setActiveTable] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedRowId, setSelectedRowId] = useState(null);
   const [selectedTableKey, setSelectedTableKey] = useState(null);
+  const [activeTable, setActiveTable] = useState({ fitness: true, itAssets: false });
   const isMobile = useMediaQuery("(max-width:768px)");
 
   useEffect(() => {
@@ -56,14 +58,12 @@ export default function EquipmentTable({
                   const isActive = params.value === "Active";
                   return (
                     <Chip
-                      onClick={(e) => openStatusMenu(e, params, "fitness")}
+                    data-testid={`status-chip-${params.id}`}
+                    onClick={(e) => openStatusMenu(e, params, "fitness")}
                       label={
                         <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                           <FiberManualRecord
-                            sx={{
-                              fontSize: 12,
-                              color: isActive ? "#4caf50" : "#f44336",
-                            }}
+                            sx={{ fontSize: 12, color: isActive ? "#4caf50" : "#f44336" }}
                           />
                           {params.value}
                           <ArrowDropDown sx={{ fontSize: 18 }} />
@@ -133,10 +133,8 @@ export default function EquipmentTable({
             ],
           },
         ];
-        
 
         setTables(tableConfigs);
-        setActiveTable("fitness");
       } catch (err) {
         console.error("Error fetching data", err);
       }
@@ -163,6 +161,13 @@ export default function EquipmentTable({
             ? { ...row, equipmentStatus: status, status }
             : row
         );
+
+        if (selectedTableKey === "fitness") {
+          setFitnessData(updatedData);
+        } else if (selectedTableKey === "itAssets") {
+          setItAssetsData(updatedData);
+        }
+
         return { ...table, data: updatedData };
       })
     );
@@ -172,12 +177,32 @@ export default function EquipmentTable({
     setSelectedTableKey(null);
   };
 
+  const getRows = (tableKey, table) => {
+    if (tableKey === "fitness") {
+      const filterApplied = filteredFitnessData.length > 0 || 
+        (visibleColumns["deviceName"] || visibleColumns["deviceType"]);
+      return filterApplied
+        ? filteredFitnessData
+        : table.data;
+    }
+    if (tableKey === "itAssets") {
+      const filterApplied = filteredItAssetsData.length > 0 || 
+        (visibleColumns["deviceName"] || visibleColumns["macId"]);
+      return filterApplied
+        ? filteredItAssetsData
+        : table.data;
+    }
+    return table.data;
+  };
+
   return (
     <>
       {tables.map((table) => {
         const activeCols = table.columns.filter(
           (col) => visibleColumns[col.field]
         );
+
+        const rows = getRows(table.key, table);
 
         return (
           <Box key={table.key} sx={{ mt: 3 }}>
@@ -193,21 +218,24 @@ export default function EquipmentTable({
                 fontSize: isMobile ? "0.9rem" : "1rem",
               }}
               onClick={() =>
-                setActiveTable(activeTable === table.key ? null : table.key)
+                setActiveTable((prev) => ({
+                  ...prev,
+                  [table.key]: !prev[table.key],
+                }))
               }
             >
-              {table.title} ({table.data.length})
-              {activeTable === table.key ? (
+              {table.title} ({rows.length})
+              {activeTable[table.key] ? (
                 <KeyboardArrowUpIcon />
               ) : (
                 <KeyboardArrowDownIcon />
               )}
             </Typography>
 
-            {activeTable === table.key && (
+            {activeTable[table.key] && (
               <Box sx={{ height: isMobile ? 300 : 400, overflowX: "auto" }}>
                 <DataGrid
-                  rows={table.data}
+                  rows={rows}
                   columns={activeCols}
                   getRowId={table.getRowId}
                   pageSize={5}
@@ -221,6 +249,9 @@ export default function EquipmentTable({
                     "& .MuiDataGrid-columnHeaders": { borderBottom: "none" },
                     "& .MuiDataGrid-row": { border: "none" },
                   }}
+                  localeText={{
+                    noRowsLabel: "No data present here",
+                  }}
                 />
               </Box>
             )}
@@ -228,16 +259,13 @@ export default function EquipmentTable({
         );
       })}
 
-      {/* Status Menu */}
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
       >
         <MenuItem onClick={() => handleStatusChange("Active")}>Active</MenuItem>
-        <MenuItem onClick={() => handleStatusChange("Inactive")}>
-          Inactive
-        </MenuItem>
+        <MenuItem onClick={() => handleStatusChange("Inactive")}>Inactive</MenuItem>
       </Menu>
     </>
   );

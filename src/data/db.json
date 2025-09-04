@@ -90,17 +90,17 @@
       "deviceType": "Treadmill",
       "serialNumber": "E1126200543",
       "facility": "Woodland Hills",
-      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "lastActivity": "18 Mar 2024 | 12:40 PM",
       "equipmentStatus": "Active",
       "powerMeterStatus": "Up to date"
     },
     {
       "id": "2",
-      "deviceName": "Life Fitness",
+      "deviceName": "Studio Cycling",
       "deviceType": "Treadmill",
       "serialNumber": "E1126200234",
       "facility": "Woodland Hills",
-      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "lastActivity": "28 Apr 2024 | 11:38 PM",
       "equipmentStatus": "Active",
       "powerMeterStatus": "Up to date"
     },
@@ -110,27 +110,27 @@
       "deviceType": "Treadmill",
       "serialNumber": "E1126201234",
       "facility": "Woodland Hills",
-      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "lastActivity": "08 Jan 2024 | 10:38 PM",
       "equipmentStatus": "Active",
       "powerMeterStatus": "Up to date"
     },
     {
       "id": "4",
-      "deviceName": "Life Fitness",
+      "deviceName": "Threadmill",
       "deviceType": "Treadmill",
       "serialNumber": "E1126201236",
       "facility": "Woodland Hills",
-      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "lastActivity": "28 Feb 2024 | 09:38 PM",
       "equipmentStatus": "Active",
       "powerMeterStatus": "Up to date"
     },
     {
       "id": "5",
-      "deviceName": "Life Fitness",
+      "deviceName": "Studio Cycling",
       "deviceType": "Treadmill",
       "serialNumber": "E1126201230",
       "facility": "Woodland Hills",
-      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "lastActivity": "25 Apr 2024 | 12:10 PM",
       "equipmentStatus": "Active",
       "powerMeterStatus": "Up to date"
     }
@@ -142,7 +142,7 @@
       "macId": "10:9B:8C:7D:6E:5F",
       "ipAddress": "192.168.0.2",
       "facility": "Woodland Hills",
-      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "lastActivity": "28 Sept 2024 | 12:28 PM",
       "connectedDevices": 12,
       "greengrassVer": "-",
       "status": "Up to date"
@@ -153,7 +153,7 @@
       "macId": "50:4B:3C:2D:1E:0F",
       "ipAddress": "192.168.0.10",
       "facility": "Woodland Hills",
-      "lastActivity": "28 Apr 2024 | 12:38 PM",
+      "lastActivity": "28 Oct 2024 | 12:18 PM",
       "connectedDevices": "-",
       "greengrassVer": "2.12.4",
       "status": "Up to date"

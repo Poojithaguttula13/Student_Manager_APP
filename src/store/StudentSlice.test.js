@@ -1,14 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
-import studentReducer, {
+import reducer, {
   fetchStudents,
   addStudent,
   deleteStudent,
-} from './StudentSlice';
+  fetchEquipment,
+  fetchEquipmentTable,
+} from "./StudentSlice";
+import * as api from "../api/StudentAPI";
 
-import * as StudentAPI from '../api/StudentAPI';
-
-
-// Mock API module
+jest.mock("../api/StudentAPI");
 
 jest.mock('axios', () =>({
     getStudents: jest.fn(),
@@ -16,68 +15,146 @@ jest.mock('axios', () =>({
     removeStudent: jest.fn()
 
 }));
-
-jest.mock('../api/StudentAPI');
-
-describe('studentSlice async thunks', () => {
-  let store;
-
-  beforeEach(() => {
-    store = configureStore({
-      reducer: {
-        students: studentReducer,
-      },
-    });
-  });
+describe("studentSlice", () => {
+  const initialState = {
+    list: [],
+    equipmentList: [],
+    equipmentTable: [],
+  };
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  test('fetchStudents should fetch and set student list', async () => {
-    const mockStudents = [{ id: 1, name: 'John' }, { id: 2, name: 'Jane' }];
-    StudentAPI.getStudents.mockResolvedValue({ data: mockStudents });
-
-    await store.dispatch(fetchStudents());
-
-    const state = store.getState().students;
-    expect(state.list).toEqual(mockStudents);
-    expect(StudentAPI.getStudents).toHaveBeenCalledTimes(1);
+  test("should return the initial state", () => {
+    expect(reducer(undefined, { type: "@@INIT" })).toEqual(initialState);
   });
 
-  test('addStudent should add a student to the list', async () => {
-    const newStudent = { id: 3, name: 'Alice' };
-    StudentAPI.createStudent.mockResolvedValue({ data: newStudent });
-
-    await store.dispatch(addStudent(newStudent));
-
-    const state = store.getState().students;
-    expect(state.list).toContainEqual(newStudent);
-    expect(StudentAPI.createStudent).toHaveBeenCalledWith(newStudent);
-  });
-
-  test('deleteStudent should remove the student from the list', async () => {
-    // First preload state
-    store = configureStore({
-      reducer: {
-        students: studentReducer,
-      },
-      preloadedState: {
-        students: {
-          list: [
-            { id: 1, name: 'John' },
-            { id: 2, name: 'Jane' },
-          ],
-        },
-      },
+  describe("reducers from thunks", () => {
+    test("should handle fetchStudents.fulfilled", () => {
+      const payload = [{ id: 1, name: "John" }];
+      const nextState = reducer(initialState, {
+        type: fetchStudents.fulfilled.type,
+        payload,
+      });
+      expect(nextState.list).toEqual(payload);
     });
 
-    StudentAPI.removeStudent.mockResolvedValue({}); // doesn't return data
+    test("should handle addStudent.fulfilled", () => {
+      const payload = { id: 2, name: "Jane" };
+      const prevState = { ...initialState, list: [{ id: 1, name: "John" }] };
+      const nextState = reducer(prevState, {
+        type: addStudent.fulfilled.type,
+        payload,
+      });
+      expect(nextState.list).toEqual([
+        { id: 1, name: "John" },
+        { id: 2, name: "Jane" },
+      ]);
+    });
 
-    await store.dispatch(deleteStudent(1));
+    test("should handle deleteStudent.fulfilled", () => {
+      const prevState = {
+        ...initialState,
+        list: [{ id: 1, name: "John" }, { id: 2, name: "Jane" }],
+      };
+      const nextState = reducer(prevState, {
+        type: deleteStudent.fulfilled.type,
+        payload: 1,
+      });
+      expect(nextState.list).toEqual([{ id: 2, name: "Jane" }]);
+    });
 
-    const state = store.getState().students;
-    expect(state.list).toEqual([{ id: 2, name: 'Jane' }]);
-    expect(StudentAPI.removeStudent).toHaveBeenCalledWith(1);
+    test("should handle fetchEquipment.fulfilled", () => {
+      const payload = [{ id: "eq1", type: "Treadmill" }];
+      const nextState = reducer(initialState, {
+        type: fetchEquipment.fulfilled.type,
+        payload,
+      });
+      expect(nextState.equipmentList).toEqual(payload);
+    });
+
+    test("should handle fetchEquipmentTable.fulfilled", () => {
+      const payload = [{ id: "row1", equipment: "Bike" }];
+      const nextState = reducer(initialState, {
+        type: fetchEquipmentTable.fulfilled.type,
+        payload,
+      });
+      expect(nextState.equipmentTable).toEqual(payload);
+    });
   });
+
+  describe("async thunks", () => {
+    test("fetchStudents should call API and return data", async () => {
+      const mockData = { data: [{ id: 1, name: "John" }] };
+      api.getStudents.mockResolvedValueOnce(mockData);
+
+      const result = await fetchStudents()(
+        jest.fn(), // dispatch
+        () => ({}), // getState
+        undefined // extra
+      );
+
+      expect(api.getStudents).toHaveBeenCalledTimes(1);
+      expect(result.payload).toEqual(mockData.data);
+    });
+
+    test("addStudent should call API and return data", async () => {
+      const student = { name: "Jane" };
+      const mockData = { data: { id: 2, ...student } };
+      api.createStudent.mockResolvedValueOnce(mockData);
+
+      const result = await addStudent(student)(
+        jest.fn(),
+        () => ({}),
+        undefined
+      );
+
+      expect(api.createStudent).toHaveBeenCalledWith(student);
+      expect(result.payload).toEqual(mockData.data);
+    });
+
+    test("deleteStudent should call API and return id", async () => {
+      api.removeStudent.mockResolvedValueOnce({});
+      const id = 1;
+
+      const result = await deleteStudent(id)(
+        jest.fn(),
+        () => ({}),
+        undefined
+      );
+
+      expect(api.removeStudent).toHaveBeenCalledWith(id);
+      expect(result.payload).toBe(id);
+    });
+
+    test("fetchEquipment should call API and return data", async () => {
+      const mockData = { data: [{ id: "eq1", type: "Treadmill" }] };
+      api.getEquipment.mockResolvedValueOnce(mockData);
+
+      const result = await fetchEquipment()(
+        jest.fn(),
+        () => ({}),
+        undefined
+      );
+
+      expect(api.getEquipment).toHaveBeenCalledTimes(1);
+      expect(result.payload).toEqual(mockData.data);
+    });
+
+    test("fetchEquipmentTable should call API and return data", async () => {
+      const mockData = { data: [{ id: "row1", equipment: "Bike" }] };
+      api.getEquipmentTable.mockResolvedValueOnce(mockData);
+
+      const result = await fetchEquipmentTable()(
+        jest.fn(),
+        () => ({}),
+        undefined
+      );
+
+      expect(api.getEquipmentTable).toHaveBeenCalledTimes(1);
+      expect(result.payload).toEqual(mockData.data);
+    });
+  });
+
 });

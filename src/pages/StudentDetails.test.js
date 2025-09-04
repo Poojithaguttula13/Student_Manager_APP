@@ -81,7 +81,6 @@ jest.mock('react-router-dom', () => {
     const fallbackBackButton = screen.getByRole('button', { name: /back/i });
     fireEvent.click(fallbackBackButton);
 
-    // expect(mockNavigate).toHaveBeenCalledWith('/studentPage');
   });
 
 });

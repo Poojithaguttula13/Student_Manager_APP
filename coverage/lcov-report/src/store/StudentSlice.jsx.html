@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.91% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/23</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>8/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.72% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/22</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -142,15 +142,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,10 +175,10 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -201,16 +201,16 @@ export const deleteStudent = createAsyncThunk("students/delete", async (id) =&gt
   return id;
 });
 &nbsp;
-export const fetchEquipment = createAsyncThunk("equipment/fetch", <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
-  const res = <span class="cstat-no" title="statement not covered" >await getEquipment();</span>
-<span class="cstat-no" title="statement not covered" >  return res.data;</span>
+export const fetchEquipment = createAsyncThunk("equipment/fetch", async () =&gt; {
+  const res = await getEquipment();
+  return res.data;
 });
 &nbsp;
 export const fetchEquipmentTable = createAsyncThunk(
   "equipment/fetchTable",
-<span class="fstat-no" title="function not covered" >  as</span>ync () =&gt; {
-    const res = <span class="cstat-no" title="statement not covered" >await getEquipmentTable();</span>
-<span class="cstat-no" title="statement not covered" >    return res.data;</span>
+  async () =&gt; {
+    const res = await getEquipmentTable();
+    return res.data;
   }
 );
 &nbsp;
@@ -234,11 +234,11 @@ const studentSlice = createSlice({
       .addCase(deleteStudent.fulfilled, (state, action) =&gt; {
         state.list = state.list.filter((s) =&gt; s.id !== action.payload);
       })
-      .addCase(fetchEquipment.fulfilled, <span class="fstat-no" title="function not covered" >(s</span>tate, action) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.equipmentList = action.payload;</span>
+      .addCase(fetchEquipment.fulfilled, (state, action) =&gt; {
+        state.equipmentList = action.payload;
       })
-      .addCase(fetchEquipmentTable.fulfilled, <span class="fstat-no" title="function not covered" >(s</span>tate, action) =&gt; {
-<span class="cstat-no" title="statement not covered" >        state.equipmentTable = action.payload;</span>
+      .addCase(fetchEquipmentTable.fulfilled, (state, action) =&gt; {
+        state.equipmentTable = action.payload;
       });
   },
 });
@@ -250,7 +250,7 @@ export default studentSlice.reducer;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-28T10:24:37.773Z
+                at 2025-09-04T09:24:52.646Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

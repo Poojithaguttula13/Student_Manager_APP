@@ -106,23 +106,5 @@ test('shows error toast on invalid credentials', async () => {
   });
   
 
-//   test('shows error toast on API failure', async () => {
-//     axios.get.mockRejectedValueOnce(new Error('API failed'));
-
-//     renderWithRouter(<Login />);
-
-//     fireEvent.change(screen.getByLabelText(/email/i), {
-//       target: { value: 'test@example.com' },
-//     });
-//     fireEvent.change(screen.getByLabelText(/password/i), {
-//       target: { value: 'password123' },
-//     });
-
-//     fireEvent.click(screen.getByRole('button', { name: /login/i }));
-
-//     await waitFor(() => {
-//       expect(toast.error).toHaveBeenCalledWith('Something went wrong', expect.any(Error));
-//     });
-//   });
 
 });

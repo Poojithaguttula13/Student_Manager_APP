@@ -10,9 +10,6 @@ import { fetchStudents, deleteStudent, addStudent } from "../../store/StudentSli
 import { configureStore } from "@reduxjs/toolkit";
 import studentReducer from '../../store/StudentSlice'
 
-// const middlewares = [thunk];
-// const mockStore = configureMockStore(middlewares); // ✅ pass middleware array to the function
-// let store;
 const mockNavigate = jest.fn();
 
 jest.mock("react-router-dom", () => ({
